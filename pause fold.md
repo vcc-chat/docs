@@ -1,4 +1,4 @@
 using
 
 paused
-Copyright Law(pause now)
+Copyright Law
