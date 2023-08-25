@@ -13,6 +13,7 @@ author = 'Calvinlin'
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
+html_theme = "sphinx_rtd_theme"
 extensions = ['myst_parser']
 source_suffix = {
     '.rst': 'restructuredtext',
