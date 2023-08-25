@@ -1,11 +1,24 @@
+name: Docs
 on: [push]
-
+permissions:
+    contents: write
 jobs:
-  build:
-    name: Push Sphinx Pages
+  docs:
     runs-on: ubuntu-latest
     steps:
-    - uses: seanzhengw/sphinx-pages@master
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        create_readme: true
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v3
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+      - name: Sphinx build
+        run: |
+          sphinx-build source _build
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+        with:
+          publish_branch: gh-pages
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: build/
+          force_orphan: true
